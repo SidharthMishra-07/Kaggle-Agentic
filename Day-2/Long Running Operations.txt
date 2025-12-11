@@ -1,0 +1,22 @@
+
+Long-Running Operations (Human-in-the-Loop)
+
+So far, all tools execute and return immediately:
+User asks → Agent calls tool → Tool returns result → Agent responds
+
+--But what if your tools are long-running or you need human approval before completing an action?
+--Example: A shipping agent should ask for approval before placing a large order.
+
+User asks → Agent calls tool → Tool PAUSES and asks human → Human approves → Tool completes → Agent responds
+
+This is called a Long-Running Operation (LRO) - the tool needs to pause, wait for external input (human approval), then resume.
+
+
+## When to use Long-Running Operations:
+
+💰 Financial transactions requiring approval (transfers, purchases)
+🗑️ Bulk operations (delete 1000 records - confirm first!)
+📋 Compliance checkpoints (regulatory approval needed)
+💸 High-cost actions (spin up 50 servers - are you sure?)
+⚠️ Irreversible operations (permanently delete account)
+

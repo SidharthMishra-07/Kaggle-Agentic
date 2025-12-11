@@ -1,0 +1,41 @@
+The agent won't automatically handle pause/resume. Every long-running operation workflow requires you to:
+
+    1. Detect the pause: Check if events contain adk_request_confirmation
+    2. Get human decision: In production, show UI and wait for user click. Here, we simulate it.
+    3. Resume the agent: Send the decision back with the saved invocation_id
+
+Understand Key Technical Concepts
+👉 events - ADK creates events as the agent executes. Tool calls, model responses, function results - all become events
+
+👉 adk_request_confirmation event - This event is special - it signals "pause here!"
+        Automatically created by ADK when your tool calls request_confirmation()
+        Contains the invocation_id
+        Your workflow must detect this event to know the agent paused
+
+👉 invocation_id - Every call to run_async() gets a unique invocation_id (like "abc123")
+        When a tool pauses, you save this ID
+        When resuming, pass the same ID so ADK knows which execution to continue
+        Without it, ADK would start a NEW execution instead of resuming the paused one
+
+
+
+Code breakdown
+Step 1: Send initial request to the Agent
+
+Call run_async() to start agent execution
+Collect all events in a list for inspection
+Step 2: Detect Pause
+
+Call check_for_approval(events) to look for the special event: adk_request_confirmation
+Returns approval info (with invocation_id) if the special event is present; None if completed
+Step 3: Resume execution
+
+PATH A:
+
+If the approval info is present, at this point the Agent pauses for human input.
+Once the Human input is available, call the agent again using run_async() and pass in the Human input.
+Critical: Same invocation_id (tells ADK to RESUME, not restart)
+Display agent's final response after resuming
+PATH B:
+
+If the approval info is not present, then approval is not needed and the agent completes execution.

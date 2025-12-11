@@ -1,0 +1,32 @@
+
+Model Context Protocol (MCP) is an open standard that lets agents use community-built integrations. Instead of writing your own integrations and API clients, just connect to an existing MCP server.
+
+MCP enables agents to:
+
+✅ Access live, external data from databases, APIs, and services without custom integration code
+✅ Leverage community-built tools with standardized interfaces
+✅ Scale capabilities by connecting to multiple specialized servers
+
+2.1: How MCP Works
+MCP connects your agent (the client) to external MCP servers that provide tools:
+
+MCP Server: Provides specific tools (like image generation, database access)
+MCP Client: Your agent that uses those tools
+All servers work the same way - standardized interface
+
+
+Architecture:
+┌──────────────────┐
+│   Your Agent     │
+│   (MCP Client)   │
+└────────┬─────────┘
+         │
+         │ Standard MCP Protocol
+         │
+    ┌────┴────┬────────┬────────┐
+    │         │        │        │
+    ▼         ▼        ▼        ▼
+┌────────┐ ┌─────┐ ┌──────┐ ┌─────┐
+│ GitHub │ │Slack│ │ Maps │ │ ... │
+│ Server │ │ MCP │ │ MCP  │ │     │
+└────────┘ └─────┘ └──────┘ └─────┘

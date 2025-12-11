@@ -1,0 +1,11 @@
+5.1 Session state management
+
+Let's explore how to manually manage session state through custom tools. In this example, we'll identify a transferable characteristic, like a user's name and their country, and create tools to capture and save it.
+
+Why This Example?
+
+The username is a perfect example of information that:
+
+Is introduced once but referenced multiple times
+Should persist throughout a conversation
+Represents a user-specific characteristic that enhances personalization

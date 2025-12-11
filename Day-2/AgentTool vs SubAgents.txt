@@ -1,0 +1,16 @@
+This is a common question! Both involve using multiple agents, but they work very differently:
+
+--> Agent Tools (what we're using):
+
+Agent A calls Agent B as a tool
+Agent B's response goes back to Agent A
+Agent A stays in control and continues the conversation
+Use case: Delegation for specific tasks (like calculations)
+
+--> Sub-Agents (different pattern):
+
+Agent A transfers control completely to Agent B
+Agent B takes over and handles all future user input
+Agent A is out of the loop
+Use case: Handoff to specialists (like customer support tiers)
+In our currency example: We want the currency agent to get calculation results and continue working with them, so we use Agent Tools, not sub-agents.
