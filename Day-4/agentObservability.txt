@@ -1,0 +1,33 @@
+--> What is Agent Observability?
+🚨 The challenge: Unlike traditional software that fails predictably, AI agents can fail mysteriously. Example:
+
+User: "Find quantum computing papers"
+Agent: "I cannot help with that request."
+You: 😭 WHY?? Is it the prompt? Missing tools? API error?
+💡 The Solution: Agent observability gives you complete visibility into your agent's decision-making process. You'll see exactly what prompts are sent to the LLM, which tools are available, how the model responds, and where failures occur.
+
+DEBUG Log: LLM Request shows "Functions: []" (no tools!)
+You: 🎯 Aha! Missing google_search tool - easy fix!
+
+
+Foundational pillars of Agent Observability
+    Logs: A log is a record of a single event, telling you what happened at a specific moment.
+    Traces: A trace connects the logs into a single story, showing you why a final result occurred by revealing the entire sequence of steps.
+    Metrics: Metrics are the summary numbers (like averages and error rates) that tell you how well the agent is performing overall.
+
+
+--> How to add logs for production observability?
+
+A Plugin is a custom code module that runs automatically at various stages of your agent's lifecycle. Plugins are composed of "Callbacks" which provide the hooks to interrupt an agent's flow. Think of it like this:
+
+    Your agent workflow: User message → Agent thinks → Calls tools → Returns response
+    Plugin hooks into this: Before agent starts → After tool runs → When LLM responds → etc.
+    Plugin contains your custom code: Logging, monitoring, security checks, caching, etc.
+
+Callbacks are the atomic components inside a Plugin - these are just Python functions that run at specific points in an agent's lifecycle! *Callbacks are grouped together to create a Plugin.*
+
+There are different kinds of callbacks such as:
+    before/after_agent_callbacks - runs before/after an agent is invoked
+    before/after_tool_callbacks - runs before/after a tool is called
+    before/after_model_callbacks - similarly, runs before/after the LLM model is called
+    on_model_error_callback - which runs when a model error is encountered

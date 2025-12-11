@@ -1,0 +1,39 @@
+--> What is Memory?
+
+Memory is a service that provides long-term knowledge storage for your agents. The key distinction:
+
+    Session = Short-term memory (single conversation)
+    Memory = Long-term knowledge (across multiple conversations)
+
+Think of it in software engineering terms: Session is like application state (temporary), while Memory is like a database (persistent).
+
+
+--> Memory Workflow
+
+In order to integrate Memory into your Agents, there are three high-level steps.
+
+Three-step integration process:
+    Initialize → Create a MemoryService and provide it to your agent via the Runner
+    Ingest → Transfer session data to memory using add_session_to_memory()
+    Retrieve → Search stored memories using search_memory()
+
+
+--> Memory Retrieval in ADK
+
+ADK provides two built-in tools for memory retrieval:
+
+load_memory (Reactive)
+
+    Agent decides when to search memory
+    Only retrieves when the agent thinks it's needed
+    More efficient (saves tokens)
+    Risk: Agent might forget to search
+
+preload_memory (Proactive)
+
+    Automatically searches before every turn
+    Memory always available to the agent
+    Guaranteed context, but less efficient
+    Searches even when not needed
+
+Think of it like studying for an exam: load_memory is looking things up only when you need them, while preload_memory is reading all your notes before answering each question.

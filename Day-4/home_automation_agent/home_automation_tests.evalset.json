@@ -1,0 +1,70 @@
+{
+  "eval_set_id": "home_automation_tests",
+  "name": "home_automation_tests",
+  "eval_cases": [
+    {
+      "eval_id": "basic_device_control",
+      "conversation": [
+        {
+          "invocation_id": "e-69644d50-73b6-4a8d-ad20-3dbe74a279f1",
+          "user_content": {
+            "parts": [
+              {
+                "text": "Turn on the desk lamp in the office"
+              }
+            ],
+            "role": "user"
+          },
+          "intermediate_data": {
+            "invocation_events": [
+              {
+                "author": "home_automation_agent",
+                "content": {
+                  "parts": [
+                    {
+                      "function_call": {
+                        "id": "adk-aa65c8c5-a7ca-4b80-980d-69bd0d25676a",
+                        "args": {
+                          "location": "office",
+                          "device_id": "desk lamp",
+                          "status": "ON"
+                        },
+                        "name": "set_device_status"
+                      }
+                    }
+                  ],
+                  "role": "model"
+                }
+              },
+              {
+                "author": "home_automation_agent",
+                "content": {
+                  "parts": [
+                    {
+                      "function_response": {
+                        "id": "adk-aa65c8c5-a7ca-4b80-980d-69bd0d25676a",
+                        "name": "set_device_status",
+                        "response": {
+                          "success": true,
+                          "message": "Successfully set the desk lamp in office to on."
+                        }
+                      }
+                    }
+                  ],
+                  "role": "user"
+                }
+              }
+            ]
+          },
+          "creation_timestamp": 1764755999.740197
+        }
+      ],
+      "session_input": {
+        "app_name": "home_automation_agent",
+        "user_id": "user"
+      },
+      "creation_timestamp": 1764758558.9409583
+    }
+  ],
+  "creation_timestamp": 1764758544.5740335
+}

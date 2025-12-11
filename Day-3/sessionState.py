@@ -135,21 +135,22 @@ runner = Runner(agent=root_agent, app_name=APP_NAME, session_service=session_ser
 async def main():
     await run_session(
         runner,
-        # ["Hi there, how are you doing today? What is my name?",  # Agent shouldn't know the name yet
-        # "My name is Sid. I'm from India.",  # Provide name - agent should save it
-        # "What is my name? Which country am I from?",  # Agent should recall from session state
-        # ],
-        [
-            "Hi there, how are you doing today? What is my name?"
+        ["Hi there, how are you doing today? What is my name?",  # Agent shouldn't know the name yet
+        "My name is Sid. I'm from India.",  # Provide name - agent should save it
+        "What is my name? Which country am I from?",  # Agent should recall from session state
         ],
-    "isolated-session",
+        # [
+        #     "Hi there, how are you doing today? What is my name?"
+        # ],
+    "sessionState-session-01",
     )
 
     session = await session_service.get_session(
         app_name=APP_NAME,
         user_id=USER_ID,
-        session_id="isolated-session",
+        session_id="sessionState-session-01",
     )
     print(f"\nSession State: {session.state}")
 
-asyncio.run(main())
+if __name__ == "__main__":
+    asyncio.run(main())

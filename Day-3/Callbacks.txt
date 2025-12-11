@@ -1,0 +1,32 @@
+--> Callbacks
+
+ADK's callback system lets you hook into key execution moments. Callbacks are Python functions you define and attach to agents - ADK automatically calls them at specific stages, acting like checkpoints during the agent's execution flow.
+
+Think of callbacks as event listeners in your agent's lifecycle. When an agent processes a request, it goes through multiple stages: receiving the input, calling the LLM, invoking tools, and generating the response. Callbacks let you insert custom logic at each of these stages without modifying the core agent code.
+
+Available callback types:
+
+    before_agent_callback → Runs before agent starts processing a request
+    after_agent_callback → Runs after agent completes its turn
+    before_tool_callback / after_tool_callback → Around tool invocations
+    before_model_callback / after_model_callback → Around LLM calls
+    on_model_error_callback → When errors occur
+
+Common use cases:
+    Logging and observability (track what the agent does)
+    Automatic data persistence (like saving to memory)
+    Custom validation or filtering
+    Performance monitoring
+
+
+--> Automatic Memory Storage with Callbacks
+
+For automatic memory storage, we'll use after_agent_callback. This function triggers every time the agent finishes a turn, then calls add_session_to_memory() to persist the conversation automatically.
+
+But here's the challenge: how does our callback function actually access the memory service and current session? That's where callback_context comes in.
+
+When you define a callback function, ADK automatically passes a special parameter called callback_context to it. The callback_context provides access to the Memory Service and other runtime components.
+
+How we'll use it: In our callback, we'll access the memory service and current session to automatically save conversation data after each turn.
+
+💡 Important: You don't create this context - ADK creates it and passes it to your callback automatically when the callback runs.
